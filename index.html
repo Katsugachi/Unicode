@@ -1,146 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Unicode Standardised Set</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>The 16 Deadly Unicodes</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     body {
-      background-color: #fff;
-      color: #b30000;
-      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
       margin: 0;
       padding: 2rem;
+      background: #fff;
+      color: #b30000;
+      font-family: 'Segoe UI','Helvetica Neue',sans-serif;
     }
 
     h1 {
       text-align: center;
       font-size: 2.5rem;
-      margin-bottom: 1rem;
       border-bottom: 2px solid #b30000;
-      padding-bottom: 0.5rem;
+      padding-bottom: .5rem;
+      margin-bottom: 2rem;
+    }
+
+    #star-graphic {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    #star-graphic img {
+      max-width: 300px;
+      width: 80%;
+      height: auto;
     }
 
     .char-card {
       border: 1px solid #b30000;
       border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem 0;
-      background-color: #fff5f5;
+      background: #fff5f5;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
-    .char-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .char-code {
+    .char-title {
+      font-size: 1.4rem;
       font-weight: bold;
-      font-size: 1.2rem;
+      margin-bottom: .5rem;
     }
 
-    .copy-btn {
-      background-color: #b30000;
-      color: white;
-      border: none;
-      padding: 0.3rem 0.6rem;
+    .char-description,
+    .char-usage {
+      background: #ffe5e5;
+      padding: .6rem;
       border-radius: 4px;
+      font-size: .95rem;
+      margin-bottom: .8rem;
+    }
+
+    .char-description strong,
+    .char-usage strong {
+      display: block;
+      margin-bottom: .4rem;
+    }
+
+    .char-usage code {
+      display: inline-block;
+      background: #fff;
+      padding: 2px 4px;
+      margin: 2px 0;
+      border-radius: 3px;
+      font-family: Consolas,monospace;
+    }
+
+    .buttons {
+      margin-top: .5rem;
+    }
+
+    .copy-btn,
+    .link-btn {
+      display: inline-block;
+      margin-right: .5rem;
+      background: #b30000;
+      color: #fff;
+      border: none;
+      padding: .4rem .8rem;
+      border-radius: 4px;
+      font-size: .9rem;
+      text-decoration: none;
       cursor: pointer;
-      font-size: 0.9rem;
     }
 
-    .copy-btn:hover {
-      background-color: #990000;
-    }
-
-    .char-description {
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
+    .copy-btn:hover,
+    .link-btn:hover {
+      background: #990000;
     }
 
     footer {
       text-align: center;
-      margin-top: 2rem;
-      font-size: 0.8rem;
+      margin-top: 3rem;
+      font-size: .8rem;
       color: #666;
     }
   </style>
 </head>
 <body>
 
-  <h1>Unicode Standardised Set</h1>
+  <h1>The 16 Great Unicode Characters</h1>
 
-  <div class="char-card">
-    <div class="char-header">
-      <div class="char-code">U+202E – RIGHT-TO-LEFT OVERRIDE</div>
-      <button class="copy-btn" onclick="copyChar('\u202E')">Copy</button>
-    </div>
-    <div class="char-description">
-      Reverses text direction. Used in phishing and file extension spoofing.
-    </div>
-  </div>
 
-  <div class="char-card">
-    <div class="char-header">
-      <div class="char-code">U+200D – ZERO WIDTH JOINER</div>
-      <button class="copy-btn" onclick="copyChar('\u200D')">Copy</button>
-    </div>
-    <div class="char-description">
-      Joins characters invisibly. Powers emoji combinations and ligatures.
-    </div>
-  </div>
-
-  <div class="char-card">
-    <div class="char-header">
-      <div class="char-code">U+3164 – HANGUL FILLER</div>
-      <button class="copy-btn" onclick="copyChar('\u3164')">Copy</button>
-    </div>
-    <div class="char-description">
-      Invisible printable character. Used in stealth usernames and layout hacks.
-    </div>
-  </div>
-
-  <div class="char-card">
-    <div class="char-header">
-      <div class="char-code">U+2066–U+2069 – Directional Isolates</div>
-      <button class="copy-btn" onclick="copyChar('\u2066\u2067\u2068\u2069')">Copy</button>
-    </div>
-    <div class="char-description">
-      Invisible control of bidirectional text. Used for stealth formatting.
-    </div>
-  </div>
-
-  <div class="char-card">
-    <div class="char-header">
-      <div class="char-code">U+034F – COMBINING GRAPHEME JOINER</div>
-      <button class="copy-btn" onclick="copyChar('\u034F')">Copy</button>
-    </div>
-    <div class="char-description">
-      Prevents character splitting. Used in advanced typography.
-    </div>
-  </div>
-
-  <div class="char-card">
-    <div class="char-header">
-      <div class="char-code">U+FEFF – ZERO WIDTH NO-BREAK SPACE</div>
-      <button class="copy-btn" onclick="copyChar('\uFEFF')">Copy</button>
-    </div>
-    <div class="char-description">
-      Used as BOM. Can disrupt file parsing and layout.
-    </div>
-  </div>
+  <div id="cards-container"></div>
 
   <footer>
-    &copy; 2025 Unicode Showcase by Adrain. All characters are part of the Unicode Standard.
+    &copy; 2025 by Adrain. All characters and data drawn from the Unicode Standard.
   </footer>
 
   <script>
-    function copyChar(char) {
-      navigator.clipboard.writeText(char).then(() => {
-        alert("Copied to clipboard!");
-      });
-    }
+    const chars = [
+      {
+        cp: "U+202E",
+        name: "Right-To-Left Override (RLO)",
+        description:
+          "Inserts a hidden marker that makes all subsequent text render right-to-left until the next directional mark. " +
+          "Use case: Type “abc” then RLO then “123” and you’ll see “abc321”.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#8238;" },
+          { label: "HTML hex entity",     value: "&#x202E;" },
+          { label: "CSS content",         value: `content: "\\202E";` },
+          { label: "JavaScript string",   value: `"\\u202E"` },
+          { label: "Windows Alt code",    value: "Alt + 8238" },
+          { label: "Microsoft Alt+X",     value: "202E then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+202E"
+      },
+      {
+        cp: "U+200D",
+        name: "Zero-Width Joiner (ZWJ)",
+        description:
+          "Joins adjacent characters into a single ligature or emoji sequence without adding visible spacing. " +
+          "Use case: Combine “👩” + ZWJ + “💻” to force a single “woman technologist” emoji.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#8205;" },
+          { label: "HTML hex entity",     value: "&#x200D;" },
+          { label: "CSS content",         value: `content: "\\200D";` },
+          { label: "JavaScript string",   value: `"\\u200D"` },
+          { label: "Windows Alt code",    value: "Alt + 8205" },
+          { label: "Microsoft Alt+X",     value: "200D then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+200D"
+      },
+      {
+        cp: "U+200C",
+        name: "Zero-Width Non-Joiner (ZWNJ)",
+        description:
+          "Prevents characters that normally join from forming ligatures, without inserting visible space. " +
+          "Use case: In Persian/Arabic scripts, stops unwanted letter joining.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#8204;" },
+          { label: "HTML hex entity",     value: "&#x200C;" },
+          { label: "CSS content",         value: `content: "\\200C";` },
+          { label: "JavaScript string",   value: `"\\u200C"` },
+          { label: "Windows Alt code",    value: "Alt + 8204" },
+          { label: "Microsoft Alt+X",     value: "200C then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+200C"
+      },
+      {
+        cp: "U+3164",
+        name: "Hangul Filler",
+        description:
+          "An invisible printable character classified as a Hangul letter. " +
+          "It can bypass filters that reject spaces or control characters. " +
+          "Use case: Insert into usernames or identifiers to create invisible content.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#12644;" },
+          { label: "HTML hex entity",     value: "&#x3164;" },
+          { label: "CSS content",         value: `content: "\\3164";` },
+          { label: "JavaScript string",   value: `"\\u3164"` },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "3164 then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+3164"
+      },
+      {
+        cp: "U+2066–U+2069",
+        name: "Directional Isolates (LRI/RLI/FSI/PDI)",
+        description:
+          "Invisible markers that isolate spans of text for bidirectional control without affecting surrounding text. " +
+          "Use case: Hide or isolate parts of RTL/LTR text flows.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#8294;–&#8297;" },
+          { label: "HTML hex entity",     value: "&#x2066;–&#x2069;" },
+          { label: "CSS content",         value: `content: "\\2066"; … "\\2069";` },
+          { label: "JavaScript string",   value: `"\\u2066"; … "\\u2069";` },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "2066 then Alt+X … 2069" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+2066"
+      },
+      {
+        cp: "U+034F",
+        name: "Combining Grapheme Joiner",
+        description:
+          "Prevents adjacent graphemes from separating at line breaks or between combining characters. " +
+          "Use case: Prevent unwanted splits in clusters.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#847;" },
+          { label: "HTML hex entity",     value: "&#x034F;" },
+          { label: "CSS content",         value: `content: "\\034F";` },
+          { label: "JavaScript string",   value: `"\\u034F"` },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "034F then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+034F"
+      },
+      {
+        cp: "U+FEFF",
+        name: "Zero-Width No-Break Space (BOM)",
+        description:
+          "Acts as a Byte Order Mark or invisible no-break space. " +
+          "Use case: BOM in files, disrupt file parsing or hide content.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#65279;" },
+          { label: "HTML hex entity",     value: "&#xFEFF;" },
+          { label: "CSS content",         value: `content: "\\FEFF";` },
+          { label: "JavaScript string",   value: `"\\uFEFF"` },
+          { label: "Windows Alt code",    value: "Alt + 65279" },
+          { label: "Microsoft Alt+X",     value: "FEFF then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+FEFF"
+      },
+      {
+        cp: "U+10FFFD",
+        name: "Private Use (PU-3)",
+        description:
+          "Reserved for private use; has no standardized glyph, rendering depends on custom fonts. " +
+          "Use case: Embedding custom symbols in private planes.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#11141117;" },
+          { label: "HTML hex entity",     value: "&#x10FFFD;" },
+          { label: "CSS content",         value: `content: "\\10FFFD";` },
+          { label: "JavaScript string",   value: "`\\u{10FFFD}`" },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "10FFFD then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+10FFFD"
+      },
+      {
+        cp: "U+061C",
+        name: "Arabic Letter Mark (ALM)",
+        description:
+          "Controls bidirectional embedding for Arabic text. " +
+          "Use case: Ensures correct directionality in mixed Arabic/Latin text.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#1564;" },
+          { label: "HTML hex entity",     value: "&#x061C;" },
+          { label: "CSS content",         value: `content: "\\061C";` },
+          { label: "JavaScript string",   value: `"\\u061C"` },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "061C then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+061C"
+      },
+      {
+        cp: "U+180E",
+        name: "Mongolian Vowel Separator",
+        description:
+          "Invisible format character causing rendering issues in fonts. " +
+          "Use case: Historically disrupted text; now deprecated but still supported.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#6158;" },
+          { label: "HTML hex entity",     value: "&#x180E;" },
+          { label: "CSS content",         value: `content: "\\180E";` },
+          { label: "JavaScript string",   value: `"\\u180E"` },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "180E then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+180E"
+      },
+      {
+        cp: "U+2060",
+        name: "Word Joiner",
+        description:
+          "Prevents line breaks at its position without adding visible space. " +
+          "Use case: Keep words or pairs together without whitespace.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#8288;" },
+          { label: "HTML hex entity",     value: "&#x2060;" },
+          { label: "CSS content",         value: `content: "\\2060";` },
+          { label: "JavaScript string",   value: `"\\u2060"` },
+          { label: "Windows Alt code",    value: "Alt + 8288" },
+          { label: "Microsoft Alt+X",     value: "2060 then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+2060"
+      },
+      {
+        cp: "U+200E",
+        name: "Left-To-Right Mark (LRM)",
+        description:
+          "Invisible marker that forces subsequent text to be rendered left-to-right. " +
+          "Use case: Correct direction in mixed LTR/RTL text.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#8206;" },
+          { label: "HTML hex entity",     value: "&#x200E;" },
+          { label: "CSS content",         value: `content: "\\200E";` },
+          { label: "JavaScript string",   value: `"\\u200E"` },
+          { label: "Windows Alt code",    value: "Alt + 8206" },
+          { label: "Microsoft Alt+X",     value: "200E then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+200E"
+      },
+      {
+        cp: "U+200F",
+        name: "Right-To-Left Mark (RLM)",
+        description:
+          "Invisible marker that forces subsequent text to be rendered right-to-left. " +
+          "Use case: Correct direction in mixed text flows.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#8207;" },
+          { label: "HTML hex entity",     value: "&#x200F;" },
+          { label: "CSS content",         value: `content: "\\200F";` },
+          { label: "JavaScript string",   value: `"\\u200F"` },
+          { label: "Windows Alt code",    value: "Alt + 8207" },
+          { label: "Microsoft Alt+X",     value: "200F then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+200F"
+      },
+      {
+        cp: "U+FFF9",
+        name: "Interlinear Annotation Anchor",
+        description:
+          "Marks the start of an interlinear annotation. " +
+          "Use case: Special formatting in dictionaries and lexical resources.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#65529;" },
+          { label: "HTML hex entity",     value: "&#xFFF9;" },
+          { label: "CSS content",         value: `content: "\\FFF9";` },
+          { label: "JavaScript string",   value: `"\\uFFF9"` },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "FFF9 then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+FFF9"
+      },
+      {
+        cp: "U+FFFA",
+        name: "Interlinear Annotation Separator",
+        description:
+          "Separates parts of an interlinear annotation. " +
+          "Use case: Annotation formatting in specialized texts.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#65530;" },
+          { label: "HTML hex entity",     value: "&#xFFFA;" },
+          { label: "CSS content",         value: `content: "\\FFFA";` },
+          { label: "JavaScript string",   value: `"\\uFFFA"` },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "FFFA then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+FFFA"
+      },
+      {
+        cp: "U+FFFB",
+        name: "Interlinear Annotation Terminator",
+        description:
+          "Terminates an interlinear annotation. " +
+          "Use case: End of special lexical annotations.",
+        usage: [
+          { label: "HTML decimal entity", value: "&#65531;" },
+          { label: "HTML hex entity",     value: "&#xFFFB;" },
+          { label: "CSS content",         value: `content: "\\FFFB";` },
+          { label: "JavaScript string",   value: `"\\uFFFB"` },
+          { label: "Alt code",            value: "n/a" },
+          { label: "Microsoft Alt+X",     value: "FFFB then Alt+X" }
+        ],
+        compart: "https://www.compart.com/en/unicode/U+FFFB"
+      }
+    ];
+
+    // after defining chars, compute actual charValue for copy
+    chars.forEach(c => {
+      if (c.cp.includes("2066–2069")) {
+        c.charValue = String.fromCodePoint(0x2066, 0x2067, 0x2068, 0x2069);
+      } else if (c.cp === "U+10FFFD") {
+        c.charValue = String.fromCodePoint(0x10FFFD);
+      } else {
+        const hex = c.cp.replace(/U\+/, "");
+        c.charValue = String.fromCodePoint(parseInt(hex, 16));
+      }
+    });
+
+    const container = document.getElementById("cards-container");
+
+    chars.forEach(c => {
+      const card = document.createElement("div");
+      card.className = "char-card";
+
+      // Title
+      const title = document.createElement("div");
+      title.className = "char-title";
+      title.textContent = `${c.cp} — ${c.name}`;
+      card.appendChild(title);
+
+      // Description
+      const desc = document.createElement("div");
+      desc.className = "char-description";
+      desc.innerHTML = `<strong>Description</strong><br>${c.description}`;
+      card.appendChild(desc);
+
+      // Usage
+      const usage = document.createElement("div");
+      usage.className = "char-usage";
+      usage.innerHTML = `<strong>Usage Examples</strong><br>` +
+        c.usage.map(u =>
+          `<code>${u.label}: ${u.value}</code><br>`
+        ).join("");
+      card.appendChild(usage);
+
+      // Buttons
+      const btns = document.createElement("div");
+      btns.className = "buttons";
+
+      const copy = document.createElement("button");
+      copy.className = "copy-btn";
+      copy.textContent = "Copy Character";
+      copy.onclick = () => {
+        navigator.clipboard.writeText(c.charValue);
+        alert(`Copied ${c.cp}`);
+      };
+
+      const link = document.createElement("a");
+      link.className = "link-btn";
+      link.href = c.compart;
+      link.target = "_blank";
+      link.textContent = "Compart";
+
+      btns.appendChild(copy);
+      btns.appendChild(link);
+      card.appendChild(btns);
+
+      container.appendChild(card);
+    });
   </script>
 
 </body>
