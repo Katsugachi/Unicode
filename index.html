@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unicode Standardised Set</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: #fff;
+      color: #b30000;
+      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #b30000;
+      padding-bottom: 0.5rem;
+    }
+
+    .char-card {
+      border: 1px solid #b30000;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      background-color: #fff5f5;
+    }
+
+    .char-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .char-code {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .copy-btn {
+      background-color: #b30000;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .copy-btn:hover {
+      background-color: #990000;
+    }
+
+    .char-description {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Unicode Standardised Set</h1>
+
+  <div class="char-card">
+    <div class="char-header">
+      <div class="char-code">U+202E – RIGHT-TO-LEFT OVERRIDE</div>
+      <button class="copy-btn" onclick="copyChar('\u202E')">Copy</button>
+    </div>
+    <div class="char-description">
+      Reverses text direction. Used in phishing and file extension spoofing.
+    </div>
+  </div>
+
+  <div class="char-card">
+    <div class="char-header">
+      <div class="char-code">U+200D – ZERO WIDTH JOINER</div>
+      <button class="copy-btn" onclick="copyChar('\u200D')">Copy</button>
+    </div>
+    <div class="char-description">
+      Joins characters invisibly. Powers emoji combinations and ligatures.
+    </div>
+  </div>
+
+  <div class="char-card">
+    <div class="char-header">
+      <div class="char-code">U+3164 – HANGUL FILLER</div>
+      <button class="copy-btn" onclick="copyChar('\u3164')">Copy</button>
+    </div>
+    <div class="char-description">
+      Invisible printable character. Used in stealth usernames and layout hacks.
+    </div>
+  </div>
+
+  <div class="char-card">
+    <div class="char-header">
+      <div class="char-code">U+2066–U+2069 – Directional Isolates</div>
+      <button class="copy-btn" onclick="copyChar('\u2066\u2067\u2068\u2069')">Copy</button>
+    </div>
+    <div class="char-description">
+      Invisible control of bidirectional text. Used for stealth formatting.
+    </div>
+  </div>
+
+  <div class="char-card">
+    <div class="char-header">
+      <div class="char-code">U+034F – COMBINING GRAPHEME JOINER</div>
+      <button class="copy-btn" onclick="copyChar('\u034F')">Copy</button>
+    </div>
+    <div class="char-description">
+      Prevents character splitting. Used in advanced typography.
+    </div>
+  </div>
+
+  <div class="char-card">
+    <div class="char-header">
+      <div class="char-code">U+FEFF – ZERO WIDTH NO-BREAK SPACE</div>
+      <button class="copy-btn" onclick="copyChar('\uFEFF')">Copy</button>
+    </div>
+    <div class="char-description">
+      Used as BOM. Can disrupt file parsing and layout.
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Unicode Showcase by Adrain. All characters are part of the Unicode Standard.
+  </footer>
+
+  <script>
+    function copyChar(char) {
+      navigator.clipboard.writeText(char).then(() => {
+        alert("Copied to clipboard!");
+      });
+    }
+  </script>
+
+</body>
+</html>
